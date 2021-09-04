@@ -1,0 +1,50 @@
+:root {
+}
+
+* {
+    font-family: Arial;
+}
+
+body {
+    background-color: #2C2F33;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+table td,
+table th {
+    border: 1px solid #2C2F33;
+    padding: 8px;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #23272A;
+}
+
+/*
+table tr:nth-child(odd) {
+    background-color: #2C2F33;
+}
+*/
+table tr:hover {
+    background-color: #99AAB5;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #62f6a5;
+    color: white;
+}
+
+input[type="checkbox"][readonly] {
+    pointer-events: none;
+  }

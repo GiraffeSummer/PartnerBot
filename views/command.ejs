@@ -1,0 +1,19 @@
+<tr>
+    <td>
+        <%= command.name %>
+    </td>
+    <td>
+        <%= command.description %>
+    </td>
+    <td>
+        <%= command.usage %>
+    </td>
+    <% if (admin) { %>
+        <td style="text-align: center;">
+            <%=command.admin ? '✓' : '' %> 
+        </td>
+        <% } %>
+    <td>
+        <%= command.aliases.join(', ')%>
+    </td>
+</tr>
