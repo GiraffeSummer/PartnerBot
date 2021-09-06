@@ -36,7 +36,7 @@ module.exports = (bot) => {
 
 
     app.get('/invite', async (req, res) => {
-        res.redirect(`https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=2684996689`);
+        res.redirect(`https://discord.com/oauth2/authorize?client_id=884496159354269697&scope=bot&permissions=2684996689`);
     })
 
 
