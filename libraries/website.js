@@ -3,7 +3,7 @@ const cors = require('cors');
 const { guilds } = require('./db.js');
 const app = express()
 
-const port = 4466
+const port = 4487
 
 app.set('view engine', 'ejs');
 app.set('trust proxy', 1)
