@@ -24,7 +24,7 @@ const Join = async (guild, bot) => {
             dbDoc.invite = invite.url;
             // console.log(dbDoc);
             guilds.insert(dbDoc);
-            channel.send('Server is partnered, visit https://partnerbot.cripplerick.com/');
+            //channel.send('Server is partnered, visit https://partnerbot.cripplerick.com/');
         }).catch(err => {
             //Missing Permissions
             const noPermissions = err.code == 50013;
