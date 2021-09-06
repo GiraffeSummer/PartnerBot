@@ -34,6 +34,13 @@ module.exports = (bot) => {
         res.redirect(guild.invite);
     })
 
+
+    app.get('/invite', async (req, res) => {
+        res.redirect(`https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=2684996689`);
+    })
+
+
+
     app.listen(port, () => {
         console.log(`website was loaded (http://localhost:${port})`)
     })
