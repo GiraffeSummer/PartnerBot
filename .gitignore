@@ -116,3 +116,4 @@ dist
 .pnp.*
 strategies.json
 commands/test.test.js
+.testing.env

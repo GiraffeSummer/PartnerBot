@@ -5,8 +5,10 @@ guilds.createIndex('guildId');
 module.exports = { db, guilds }
 
 const template = {
+    active: true,
     guildId: "",
     name: "",
     icon: "",
-    invite: ""
+    invite: "",
+    joins: 0
 }

@@ -14,12 +14,24 @@ module.exports = (bot) => {
     const commands = bot.commands.map(command => { if (command.config.enabled) return command.config; });
     app.get('/', async (req, res) => {
         const servers = await guilds.find({})
-        res.render('guilds', { guilds: servers });
+        res.render('guilds', {
+            guilds: servers.filter(x => x.active).map(x => {
+                x.link = "/guild/" + x.guildId;
+                return x;
+            })
+        });
     })
     app.get('/commands', async (req, res) => {
         const admin = ('admin' in req.query) ? true : false;
         let cmds = commands.filter(command => !command.admin || admin);
         res.render('index', { commands: cmds, admin });
+    })
+
+    app.get('/guild/:guildId', async (req, res) => {
+        const { guildId } = req.params;
+        let guild = await guilds.findOne({ guildId })
+        guilds.findOneAndUpdate({ guildId }, { $set: { joins: guild.joins + 1 } }).then((updatedDoc) => { console.log("updated joins") })
+        res.redirect(guild.invite);
     })
 
     app.listen(port, () => {

@@ -5,10 +5,10 @@ module.exports = async (bot) => {
 
 
     //Set bot activity
-    //const statusManager = require("../triggers/statusManager")(bot);
+    const statusManager = require("../libraries/statusManager")(bot);
 
-    //statusManager.ChangeStatus();
-    //setInterval(() => statusManager.ChangeStatus(), 0.5 * 60 * 60 * 1000);
+    statusManager.ChangeStatus();
+    setInterval(() => statusManager.ChangeStatus(), 0.5 * 60 * 60 * 1000);
 
     //check all guilds
 

@@ -15,15 +15,16 @@ const Join = async (guild, bot) => {
         const channel = await guild.channels.fetch(channelOb.channelId);
         if (channel == undefined) { return console.log('no channel found') };
 
-        const dbDoc = { guildId: guild.id, name: guild.name, invite: undefined, icon: guild.iconURL({ format: 'webp', dynamic: true, size: 1024 }) };
+        const dbDoc = { active: true, guildId: guild.id, name: guild.name, joins: parseInt('0')/*need to do this, otherwise it is NaN*/, invite: undefined, icon: guild.iconURL({ format: 'webp', dynamic: true, size: 1024 }) };
 
         channel.createInvite(
             { maxAge: 0, maxUses: 0 },
             `Created for partner in Hall of fame.`
         ).then((invite) => {
             dbDoc.invite = invite.url;
-            console.log(dbDoc);
+            // console.log(dbDoc);
             guilds.insert(dbDoc);
+            channel.send('Server is partnered, visit https://partnerbot.cripplerick.com/');
         }).catch(err => {
             //Missing Permissions
             const noPermissions = err.code == 50013;
@@ -31,6 +32,10 @@ const Join = async (guild, bot) => {
                 console.log("No permission");
                 //contact the guild in some way to
                 channel.send("I do not have the right permission to create invite, please give me permission and (for now) kick me and invite me back!")
+                    .catch(e => {
+                        console.log("no permission to send permissions message")
+                        //guild.leave()
+                    })
             }
             //still insert document (when fixed)
             //guilds.insert(dbDoc);
@@ -44,13 +49,18 @@ const Join = async (guild, bot) => {
 }
 const Check = async (guild, bot) => {
     const guildObject = await guilds.find({ guildId: guild.id });
-    if (guildObject.length == 0) {
+    const isFound = guildObject.length == 0;
+    console.log(`Checking "${guild.name}" (${isFound})`)
+    if (isFound) {
         Join(guild);
+    } else {
+        guilds.findOneAndUpdate({ guildId: guild.id }, { $set: { active: true } }).then((updatedDoc) => { console.log("set active") })
     }
 }
 
 const Delete = async (guild, bot) => {
-    guilds.remove({ guildId: guild.id })
+    //guilds.remove({ guildId: guild.id })
+    guilds.findOneAndUpdate({ guildId: guild.id }, { $set: { active: false } }).then((updatedDoc) => { console.log("set inactive") })
     /*const messages = await StaticObjects.Channels.HALLOFFAME.messages.fetch()
      const msg = messages.find(x => x.content == guild.id);
      if (msg) msg.delete(); //delete message if can find*/
