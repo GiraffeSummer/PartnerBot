@@ -6,6 +6,7 @@ module.exports = { db, guilds }
 
 const template = {
     active: true,
+    private: false,
     guildId: "",
     name: "",
     icon: "",

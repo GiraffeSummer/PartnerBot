@@ -15,7 +15,7 @@ const Join = async (guild, bot) => {
         const channel = await guild.channels.fetch(channelOb.channelId);
         if (channel == undefined) { return console.log('no channel found') };
 
-        const dbDoc = { active: true, guildId: guild.id, name: guild.name, joins: parseInt('0')/*need to do this, otherwise it is NaN*/, invite: undefined, icon: guild.iconURL({ format: 'webp', dynamic: true, size: 1024 }) };
+        const dbDoc = { active: true, private: false, guildId: guild.id, name: guild.name, joins: parseInt('0')/*need to do this, otherwise it is NaN*/, invite: undefined, icon: guild.iconURL({ format: 'webp', dynamic: true, size: 1024 }) };
 
         channel.createInvite(
             { maxAge: 0, maxUses: 0 },

@@ -15,7 +15,7 @@ module.exports = (bot) => {
     app.get('/', async (req, res) => {
         const servers = await guilds.find({})
         res.render('guilds', {
-            guilds: servers.filter(x => x.active).map(x => {
+            guilds: servers.filter(x => x.active && !x.private).map(x => {
                 x.link = "/guild/" + x.guildId;
                 return x;
             })
