@@ -22,7 +22,6 @@
         <th>Invite</th>
       </tr>
       <% if (guilds.length > 0) { %>
-      <h2><%= user.name %></h2>
       <% guilds.forEach(function(guild){ %> <%- include('guild', {guild}); %> <%
       }); %> <% } else {%>
       <tr>
