@@ -16,11 +16,12 @@ module.exports = (bot) => {
         const servers = await guilds.find({})
         res.render('guilds', {
             guilds: servers.filter(x => x.active && !x.private).map(x => {
-                x.link = "/guild/" + x.guildId;
+                x.link = "/guild/" + x.guildId + "/join";
                 return x;
             })
         });
     })
+
     app.get('/commands', async (req, res) => {
         const admin = ('admin' in req.query) ? true : false;
         let cmds = commands.filter(command => !command.admin || admin);
@@ -28,6 +29,13 @@ module.exports = (bot) => {
     })
 
     app.get('/guild/:guildId', async (req, res) => {
+        const { guildId } = req.params;
+        let guild = await guilds.findOne({ guildId })
+        guilds.findOneAndUpdate({ guildId }, { $set: { joins: guild.joins + 1 } }).then((updatedDoc) => { console.log("updated joins") })
+        res.render('guildpage', { guild });
+    })
+
+    app.get('/guild/:guildId/join', async (req, res) => {
         const { guildId } = req.params;
         let guild = await guilds.findOne({ guildId })
         guilds.findOneAndUpdate({ guildId }, { $set: { joins: guild.joins + 1 } }).then((updatedDoc) => { console.log("updated joins") })

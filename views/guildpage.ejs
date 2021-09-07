@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guilds</title>
+    <link rel="stylesheet" href="/resources/style.css" />
+    <link rel="icon" type="image/jpg" href="/resources/icons/icon.png" />
+    <style>
+      p {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('navbar', {});%>
+    <p>this is a sample page and is WIP</p>
+    <table style="width: 80%">
+      <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Invite</th>
+      </tr>
+       <%- include('guild', {guild}); %> 
+    </table>
+  </body>
+</html>
